@@ -28,7 +28,7 @@ VALIDATE(){
 
 CHECK_ROOT(){
 
-    if [ $USERID -ne 0 ]
+if [ $USERID -ne 0 ]
 then
     echo "ERROR:: you must have sudo access to execute this script"
     exit 1 #other than 0
@@ -48,8 +48,14 @@ VALIDATE $? "Enabling NodeJS 20"
 dnf install nodejs -y &>>$LOG_FILE_NAME
 VALIDATE $? "Installing NodeJS"
 
-useradd expense &>>$LOG_FILE_NAME
-VALIDATE $? "Adding expense user"
+id expense &>>$LOG_FILE_NAME
+if [ $? -ne 0 ]
+then
+    useradd expense &>>$LOG_FILE_NAME
+    VALIDATE $? "Adding expense user"
+else
+    echo -e "expense user already exists ... $Y SKIPPING $N"
+fi
 
 mkdir /app &>>$LOG_FILE_NAME
 VALIDATE $? " Create app directory"
