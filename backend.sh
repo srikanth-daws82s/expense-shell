@@ -67,8 +67,6 @@ cd /app
 unzip /tmp/backend.zip &>>$LOG_FILE_NAME
 VALIDATE $? "Unziping backend"
 
-cd /app
-
 npm install &>>$LOG_FILE_NAME
 VALIDATE $? "Installing dependencies"
 
