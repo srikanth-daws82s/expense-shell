@@ -6,7 +6,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
-LOGS_FOLDER="/var/log/expense-log" 
+LOGS_FOLDER="/var/log/expense-logs" 
 LOG_FILE=$(echo $0 | cut -d "." -f1)
 TIMESTAMP=$(date +"%d-%m-%y-%H-%S-%M")
 LOG_FILE_NAME="$LOGS_FOLDER/$LOG_FILE-$TIMESTAMP.log"
@@ -46,7 +46,7 @@ VALIDATE $? "Enabling Mysql Server"
 systemctl start mysqld &>>$LOG_FILE_NAME
 VALIDATE $? "Starting Mysql Server"
 
-mysql_secure_installation --set-root-pass ExpenseApp@1 &>>$LOG_FILE_NAME
+mysql_secure_installation --set-root-pass ExpenseApp@1
 VALIDATE $? "Setting Root Password"
 
 
